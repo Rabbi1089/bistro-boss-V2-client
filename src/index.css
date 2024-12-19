@@ -2,9 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
-@layer base {
-    body {
-      @apply bg-neutral text-gray-800 font-sans;
-    }
-  }
-  
+body {
+  background-color: white !important;
+}
+
+.parallax-container {
+  background-color: transparent !important;
+}
