@@ -5,7 +5,7 @@ import "react-tabs/style/react-tabs.css";
 import img from "../../assets/shop/banner2.jpg";
 import Cover from "../Shared/cover/Cover";
 import { useState } from "react";
-import useMenu from "../../assets/hooks/useMenu";
+import useMenu from "../../hooks/useMenu";
 import OrderTab from "./orderTab/OrderTab";
 import { useParams } from "react-router-dom";
 

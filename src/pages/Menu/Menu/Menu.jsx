@@ -1,7 +1,7 @@
 import { Helmet } from "react-helmet-async";
 import Cover from "../../Shared/cover/Cover";
 import SectionTitle from "../../../Components/SectionTitle/SectionTitle";
-import useMenu from "../../../assets/hooks/useMenu";
+import useMenu from "../../../hooks/useMenu";
 import MenuCategory from "../menu category/MenuCategory";
 
 import menuImg from "../../../assets/menu/banner3.jpg";
