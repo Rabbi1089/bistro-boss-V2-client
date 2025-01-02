@@ -5,11 +5,12 @@ import {
   onAuthStateChanged,
   signInWithEmailAndPassword,
   signOut,
+  updateProfile,
 } from "firebase/auth";
 import { app } from "../firebase/firebase.config";
 
 //1 create context
-//2.  return authcontext.provider
+//2.  return auth-context.provider
 //3 value which is  accessible from any where
 //4. Use the Provider component to wrap parts of your app and pass a value.
 //5.use <AuthProvider> in main jsx ,Without {children}, the Provider would block the rendering of its nested components, breaking B app's structure.
@@ -33,10 +34,16 @@ const AuthProvider = ({ children }) => {
     };
   }, []);
  
-  const createUser = () => {
+  const createUser = (email, password) => {
     setLoading(true)
-    return createUserWithEmailAndPassword();
+    return createUserWithEmailAndPassword(auth, email, password);
   };
+
+  const updateUserProfile = (name , photo) => {
+    updateProfile(auth.currentUser, {
+      displayName: name, photoURL: photo,
+    })
+  }
 
   const loginUser = (email, password) => {
     setLoading(true)
@@ -52,6 +59,7 @@ const AuthProvider = ({ children }) => {
     User,
     loading,
     createUser,
+    updateUserProfile,
     loginUser,
     logOut
   };

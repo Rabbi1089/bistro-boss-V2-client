@@ -7,28 +7,22 @@ import {
 
 import "./login.css";
 import bg from "../../assets/others/bg.png";
-import { useContext, useEffect, useRef } from "react";
+import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../provider/AuthProvider";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
+import Swal from "sweetalert2";
 
 const Login = () => {
   const { loginUser } = useContext(AuthContext);
+  const navigate = useNavigate();
+  const [disable, setDisable] = useState(true);
+  const location = useLocation();
+  const from = location.state?.from?.pathname || "/";
 
   useEffect(() => {
     loadCaptchaEnginge(6);
   }, []);
-
-  const capchaRef = useRef(null);
-  const handleValidateCapcha = () => {
-    const user_captcha_value = capchaRef.current.value;
-    console.log(user_captcha_value);
-    if (validateCaptcha(user_captcha_value) == true) {
-      alert("Captcha Matched");
-    } else {
-      alert("Captcha Does Not Match");
-    }
-  };
 
   const handleLogin = (e) => {
     e.preventDefault();
@@ -39,14 +33,32 @@ const Login = () => {
     loginUser(email, password)
       .then((result) => {
         const user = result.user;
-        console.log(user);
+        if (user) {
+          Swal.fire({
+            title: "Good job!",
+            text: "You logged in !",
+            icon: "success",
+          });
+        }
+        navigate(from, { replace: true });
       })
       .catch((error) => {
-        const errorCode = error.code;
         const errorMessage = error.message;
         console.log(errorMessage);
       });
   };
+
+
+  const handleValidateCapcha = (e) => {
+    const user_captcha_value = e.target.value;
+    console.log(user_captcha_value);
+    if (validateCaptcha(user_captcha_value) == true) {
+      setDisable(false);
+    } else {
+      setDisable(true);
+    }
+  };
+
   return (
     <>
       <Helmet>
@@ -95,7 +107,7 @@ const Login = () => {
                     <LoadCanvasTemplate />
                   </label>
                   <input
-                    ref={capchaRef}
+                   
                     type="text"
                     placeholder="Type above word"
                     className="input input-bordered"
@@ -114,6 +126,7 @@ const Login = () => {
                     className="btn btn-primary"
                     type="submit"
                     value="Login"
+                    disabled={disable}
                   />
                 </div>
               </form>

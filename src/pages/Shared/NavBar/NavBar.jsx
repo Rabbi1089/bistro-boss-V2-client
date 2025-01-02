@@ -1,6 +1,16 @@
 import { Link } from "react-router-dom";
+import UseAuth from "../../../hooks/UseAuth";
 
 const NavBar = () => {
+  const { User, logOut } = UseAuth();
+  console.log("user from navbar", User);
+  const handleLogOut = () => {
+    logOut()
+      .then(() => {})
+      .catch((error) => {
+        console.error(error);
+      });
+  };
   const navOptions = (
     <>
       <li>
@@ -13,16 +23,26 @@ const NavBar = () => {
         <Link to="/order/salad">Order Food</Link>
       </li>
       <li>
-        <Link to="/login">Login</Link>
+        <Link to="/secrete">secrete</Link>
       </li>
-
-
+      <li>
+        {User ? (
+          <button
+            onClick={handleLogOut}
+            className="btn btn-xs mt-2 bg-slate-200"
+          >
+            Logout
+          </button>
+        ) : (
+          <Link to="/login">Login</Link>
+        )}
+      </li>
     </>
   );
   return (
     <>
       <div className="navbar fixed z-10 bg-opacity-50 bg-slate-700 text-white max-w-screen-xl">
-      {/* fixed z-10 bg-opacity-50 bg-slate-700 text-white max-w-screen-xl || this class is written for fixed NavBar */}
+        {/* fixed z-10 bg-opacity-50 bg-slate-700 text-white max-w-screen-xl || this class is written for fixed NavBar */}
         <div className="navbar-start">
           <div className="dropdown">
             <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
