@@ -5,12 +5,12 @@ import { Helmet } from "react-helmet-async";
 import { useForm } from "react-hook-form";
 import UseAuth from "../../hooks/UseAuth";
 import Swal from "sweetalert2";
+import useAxiousPublic from "../../hooks/useAxiousPublic";
 
 const SignUp = () => {
   const { createUser, updateUserProfile } = UseAuth();
-  console.log(updateUserProfile);
   const navigate = useNavigate();
-
+  const axiosPublic = useAxiousPublic();
 
   const {
     register,
@@ -26,15 +26,23 @@ const SignUp = () => {
       updateUserProfile(data.name, data.photoURL)
         .then(() => {
           console.log("user profile info updated");
-
-          Swal.fire({
-            position: "top-end",
-            icon: "success",
-            title: "User created successfully.",
-            showConfirmButton: false,
-            timer: 1500,
+          //post user data in database
+          const userInfo = {
+            email: data.email,
+            name: data.name,
+          };
+          axiosPublic.post("/user", userInfo).then((res) => {
+            if (res.data.insertedId) {
+              Swal.fire({
+                position: "top-end",
+                icon: "success",
+                title: "User created successfully.",
+                showConfirmButton: false,
+                timer: 1500,
+              });
+              navigate("/");
+            }
           });
-          navigate("/");
         })
         .catch((error) => console.log(error));
     });
@@ -118,6 +126,7 @@ const SignUp = () => {
                       minLength: 8,
                     })}
                   />
+                  {/* Pa$$w0rd! */}
                   {errors.password && (
                     <span className=" text-red-800">
                       must contain one digit 1 to 9, 1 lowercase

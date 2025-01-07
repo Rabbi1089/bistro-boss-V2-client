@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import UseAuth from "../../../hooks/UseAuth";
 import UseCart from "../../../hooks/UseCart";
 
@@ -77,7 +77,7 @@ const NavBar = () => {
           <ul className="menu menu-horizontal px-1">{navOptions}</ul>
         </div>
         <div className="navbar-end">
-          <div className="dropdown dropdown-end">
+          <NavLink to="/dashBoard/cart" className="dropdown dropdown-end">
             <div
               tabIndex={0}
               role="button"
@@ -101,7 +101,7 @@ const NavBar = () => {
                 <span className="badge badge-sm indicator-item">{cart.length}</span>
               </div>
             </div>
-          </div>
+          </NavLink>
           <a className="btn mx-2">Pay</a>
         </div>
       </div>

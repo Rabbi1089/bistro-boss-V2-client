@@ -4,6 +4,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import UseAxiosSecure from "../../../hooks/UseAxiosSecure";
 import UseCart from "../../../hooks/UseCart";
 
+// eslint-disable-next-line react/prop-types
 const OrderItemCard = ({ item }) => {
   // eslint-disable-next-line react/prop-types
   const { image, name, recipe, price , _id} = item;
