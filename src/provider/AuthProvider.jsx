@@ -2,26 +2,27 @@ import { createContext, useEffect, useState } from "react";
 import {
   createUserWithEmailAndPassword,
   getAuth,
+  GoogleAuthProvider,
   onAuthStateChanged,
   signInWithEmailAndPassword,
+  signInWithPopup,
   signOut,
   updateProfile,
 } from "firebase/auth";
 import { app } from "../firebase/firebase.config";
-
-//1 create context
-//2.  return auth-context.provider
-//3 value which is  accessible from any where
-//4. Use the Provider component to wrap parts of your app and pass a value.
-//5.use <AuthProvider> in main jsx ,Without {children}, the Provider would block the rendering of its nested components, breaking B app's structure.
-
+/*
+1 create context
+2.  return auth-context.provider
+3 value which is  accessible from any where4. Use the Provider component to wrap parts of your app and pass a value.
+5.use <AuthProvider> in main jsx ,Without {children}, the Provider would block the rendering of its nested components, breaking B app's structure.
+*/
+export const AuthContext = createContext(null);
 const auth = getAuth(app);
-
-export const AuthContext = createContext(null)
 
 const AuthProvider = ({ children }) => {
   const [User, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
+  const GoogleProvider = new GoogleAuthProvider();
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
@@ -33,36 +34,44 @@ const AuthProvider = ({ children }) => {
       return unsubscribe();
     };
   }, []);
- 
+
   const createUser = (email, password) => {
-    setLoading(true)
+    setLoading(true);
     return createUserWithEmailAndPassword(auth, email, password);
   };
 
-  const updateUserProfile = (name , photo) => {
-    return updateProfile(auth.currentUser, {
-      displayName: name, photoURL: photo,
-    })
-  }
+  //google signUp
 
+  const signInWithGoogle = () => {
+    setLoading(true);
+    return signInWithPopup(auth, GoogleProvider);
+  };
+
+  const updateUserProfile = (name, photo) => {
+    return updateProfile(auth.currentUser, {
+      displayName: name,
+      photoURL: photo,
+    });
+  };
 
   const loginUser = (email, password) => {
-    setLoading(true)
-    return signInWithEmailAndPassword(auth, email, password)
-  }
+    setLoading(true);
+    return signInWithEmailAndPassword(auth, email, password);
+  };
 
   const logOut = () => {
     setLoading(true);
-    return signOut(auth)
-  }
+    return signOut(auth);
+  };
 
   const authinfo = {
     User,
     loading,
+    signInWithGoogle,
     createUser,
     updateUserProfile,
     loginUser,
-    logOut
+    logOut,
   };
 
   return (

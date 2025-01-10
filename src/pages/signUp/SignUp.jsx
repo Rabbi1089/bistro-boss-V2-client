@@ -6,6 +6,7 @@ import { useForm } from "react-hook-form";
 import UseAuth from "../../hooks/UseAuth";
 import Swal from "sweetalert2";
 import useAxiousPublic from "../../hooks/useAxiousPublic";
+import SocialLogin from "../../Components/socialLogin/SocialLogin";
 
 const SignUp = () => {
   const { createUser, updateUserProfile } = UseAuth();
@@ -150,6 +151,7 @@ const SignUp = () => {
                   <Link to="/SignUp">Login Here</Link>
                 </span>
               </p>
+              <SocialLogin />
             </div>
           </div>
         </div>

@@ -12,6 +12,8 @@ import { AuthContext } from "../../provider/AuthProvider";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import Swal from "sweetalert2";
+import SocialLogin from "../../Components/socialLogin/SocialLogin";
+
 
 const Login = () => {
   const { loginUser } = useContext(AuthContext);
@@ -20,6 +22,7 @@ const Login = () => {
   const location = useLocation();
   const from = location.state?.from?.pathname || "/";
   console.log("State from location" , location.state);
+
 
   useEffect(() => {
     loadCaptchaEnginge(6);
@@ -137,6 +140,7 @@ const Login = () => {
                   <Link to="/SignUp">Create an account</Link>
                 </span>
               </p>
+              <SocialLogin />
             </div>
           </div>
         </div>
