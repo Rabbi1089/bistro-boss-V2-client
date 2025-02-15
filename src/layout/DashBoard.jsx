@@ -11,12 +11,13 @@ import {
 } from "react-icons/fa";
 import { FaBagShopping, FaSpoon } from "react-icons/fa6";
 import { NavLink, Outlet } from "react-router-dom";
+import useAdmin from "../hooks/useAdmin";
 
 //todo get admin value from database
 
-const isAdmin = true;
-
 const DashBoard = () => {
+  const [isAdmin] = useAdmin();
+  console.log([isAdmin]);
   return (
     <div className="flex">
       {/* DashBoard SideBar */}

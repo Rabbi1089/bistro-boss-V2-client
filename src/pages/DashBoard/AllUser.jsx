@@ -9,7 +9,21 @@ const AllUser = () => {
   const { data: users = [], refetch } = useQuery({
     queryKey: ["user"],
     queryFn: async () => {
-      const res = await axiosSecure.get("/user");
+      // `headers` are custom headers to be sent
+      const res = await axiosSecure.get(
+        "/user"
+        /*, 
+        //This headers is called now from interceptor
+        {
+          headers: {
+            
+            authorization: `Bearer ${localStorage.getItem('access-token')}`
+          
+          }
+        }
+       
+*/
+      );
       return res.data;
     },
   });
@@ -17,9 +31,9 @@ const AllUser = () => {
   const handleMakeAdmin = (user) => {
     console.log(user);
     axiosSecure.patch(`/users/admin/${user._id}`).then((res) => {
-     // console.log(res.data);
+      // console.log(res.data);
       if (res.data.modifiedCount > 0) {
-        refetch()
+        refetch();
         Swal.fire({
           title: `${user.name} now admin`,
           icon: "success",
@@ -83,12 +97,12 @@ const AllUser = () => {
           <tbody>
             {users.map((user, id) => (
               <tr key={user._id}>
-                <th>{id+1}</th>
+                <th>{id + 1}</th>
                 <td>{user.name}</td>
                 <td>{user.email}</td>
                 <td>
                   {" "}
-                  {user.role === 'admin' ? (
+                  {user.role === "admin" ? (
                     <p>Admin</p>
                   ) : (
                     <button
