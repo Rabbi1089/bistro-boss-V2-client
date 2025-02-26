@@ -49,6 +49,12 @@ const Login = () => {
       .catch((error) => {
         const errorMessage = error.message;
         console.log(errorMessage);
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: "User name or password is incorrect!",
+         
+        });
       });
   };
 
@@ -138,6 +144,7 @@ const Login = () => {
                 New Here ?&nbsp;
                 <span className=" text-yellow-600">
                   <Link to="/SignUp">Create an account</Link>
+                  <p>A123Df!2</p>
                 </span>
               </p>
               <SocialLogin />

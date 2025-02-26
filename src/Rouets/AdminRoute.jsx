@@ -3,7 +3,7 @@ import useAdmin from "../hooks/useAdmin";
 import UseAuth from "../hooks/UseAuth";
 
 
-const AdminRoute = (children) => {
+const AdminRoute = ({children}) => {
     const {   User,
         loading} = UseAuth();
         const [isAdmin , isAdminLoading] = useAdmin();
@@ -16,7 +16,7 @@ const AdminRoute = (children) => {
         if (User && isAdmin) {
             return children
         }
-        return <Navigate to="/Login" state={{from : location}}></Navigate>
+        return <Navigate to="/Login" state={{from : location}} replace></Navigate>
         //this state will receive from login 
 };
 
