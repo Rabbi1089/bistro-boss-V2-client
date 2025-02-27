@@ -5,13 +5,11 @@ const AddItems = () => {
   const {
     register,
     handleSubmit,
-    watch,
+
     formState: { errors },
   } = useForm();
 
   const onSubmit = (data) => console.log(data);
-
-  console.log(watch("example"));
   return (
     <>
       <div>
@@ -19,33 +17,86 @@ const AddItems = () => {
           heading="add a item"
           subHeading="whats new"
         ></SectionTitle>
-        
       </div>
       <form onSubmit={handleSubmit(onSubmit)}>
+        <label className="form-control w-full">
+          <div className="label">
+            <span className="label-text">Recipe name *</span>
+          </div>
+          <input
+            {...register("recipeName", { required: true })}
+            type="text"
+            placeholder="Type here"
+            className="input input-bordered w-full"
+          />
+          {errors.recipeName && (
+            <span className=" text-red-500">This field is required</span>
+          )}
+          <div className="label"></div>
+        </label>
+        <div className=" flex gap-6">
+          {/* category */}
+          <label className="form-control w-full">
+            <div className="label">
+              <span className="label-text">category * </span>
+            </div>
+            <select
+              {...register("category", { required: true })}
+              className="select select-ghost w-full"
+            >
+              <option disabled selected>
+                Category
+              </option>
+              <option value="salad">Salad</option>
+              <option value="pizza">Pizza</option>
+              <option value="soup">Soup</option>
+              <option value="dessert">Dessert</option>
+              <option value="drinks">Drinks</option>
+            </select>
+            {errors.category && (
+              <span className=" text-red-500">This field is required</span>
+            )}
+            <div className="label"></div>
+          </label>
+          {/* Price */}
+          <label className="form-control w-full">
+            <div className="label">
+              <span className="label-text">Price *</span>
+            </div>
+            <input
+              {...register("price", { required: true })}
+              type="number"
+              placeholder="Price"
+              className="input input-bordered w-full"
+            />
+            {errors.price && (
+              <span className=" text-red-500">This field is required</span>
+            )}
+            <div className="label"></div>
+          </label>
+        </div>
+        {/* recipe Details */}
+        <label className="form-control my-6">
+          <div className="label">
+            <span className="label-text"> Recipe Details</span>
+          </div>
+          <textarea
+            {...register("recipeDetails", { required: true })}
+            className="textarea textarea-bordered h-24"
+            placeholder="Recipe Details"
+          ></textarea>
+          {errors.recipeDetails && (
+            <span className=" text-red-500">Recipe Details is required</span>
+          )}
+        </label>
+        <div className="form-control my-6">
         <input
-        defaultValue="item Name" {...register("example")}
-  type="text"
-  placeholder="Item Name"
-  className="input input-bordered input-accent w-full max-w-xs" />
+          type="file"
+          className="file-input file-input-bordered file-input-info w-full max-w-xs"
+        />
+        </div>
 
-<select {...register("category")}
-className="input input-bordered input-accent w-full max-w-xs"
->
-<option disabled selected>Select category</option>
-        <option value="salad">Salad</option>
-        <option value="pizza">Pizza</option>
-        <option value="soup">Soup</option>
-        <option value="dessert">Dessert</option>
-        <option value="drinks">Drinks</option>
-
-      </select>
-
-        {/* include validation with required or other standard HTML validation rules */}
-        <input {...register("exampleRequired", { required: true })} />
-        {/* errors will return when field validation fails  */}
-        {errors.exampleRequired && <span>This field is required</span>}
-
-        <input type="submit" />
+        <input className="btn btn-primary" type="submit" />
       </form>
     </>
   );
