@@ -2,8 +2,8 @@ import { useForm } from "react-hook-form";
 import SectionTitle from "../../Components/SectionTitle/SectionTitle";
 import { FaUtensils } from "react-icons/fa";
 import useAxiousPublic from "../../hooks/useAxiousPublic";
-import { data } from "react-router-dom";
 import UseAxiosSecure from "../../hooks/UseAxiosSecure";
+import Swal from "sweetalert2";
 
 const image_hosting_key = import.meta.env.VITE_IMAGE_HOSTING_KEY;
 const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_key}`;
@@ -31,17 +31,27 @@ const AddItems = () => {
       //now send the menu item data to the server with the image url
       const menuItem = {
         name: data.name,
-        category: data.category,
-        price: data.price,
         recipe: data.recipe,
         image: res.data.data.display_url,
+        category: data.category,
+        price: data.price
       };
       //Now send this data
       const menuRes = await axiosSecure.post('/menu', menuItem)
-      console.log(menuRes.data);
+     // console.log(menuRes.data);
+      if (menuRes.data.insertedId) {
+  
+        Swal.fire({
+          position: "top-end",
+          icon: "success",
+          title: `${menuItem.name}has been saved`,
+          showConfirmButton: false,
+          timer: 1500
+        });
+      }
       
     }
-  //  console.log(res.data);
+    //console.log(res.data);
     
   };
 
@@ -80,7 +90,8 @@ const AddItems = () => {
               {...register("category", { required: true })}
               className="select select-ghost w-full"
             >
-              <option disabled value="default" selected>
+              {/* disabled */}
+              <option  value="default" selected> 
                 Category
               </option>
               <option value="salad">Salad</option>
