@@ -1,11 +1,13 @@
 import { Link, NavLink } from "react-router-dom";
 import UseAuth from "../../../hooks/UseAuth";
 import UseCart from "../../../hooks/UseCart";
+import useAdmin from "../../../hooks/useAdmin";
 
 const NavBar = () => {
   const { User, logOut } = UseAuth();
-  //console.log("user from navbar", User);
+  console.log("user from navbar", User);
   const [cart] = UseCart();
+  const [isAdmin] = useAdmin();
   //console.log(cart);
   const handleLogOut = () => {
     logOut()
@@ -25,9 +27,16 @@ const NavBar = () => {
       <li>
         <Link to="/order/salad">Order Food</Link>
       </li>
-      <li>
-        <Link to="/secrete">secrete</Link>
-      </li>
+      {isAdmin ? (
+        <li>
+          <Link to="/dashboard/adminHome">Dashboard</Link>
+        </li>
+      ) : (
+        <li>
+          <Link to="/dashboard/userHome">Dashboard</Link>
+        </li>
+      )}
+
       <li>
         {User ? (
           <button
@@ -98,7 +107,9 @@ const NavBar = () => {
                     d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"
                   />
                 </svg>
-                <span className="badge badge-sm indicator-item">{cart.length}</span>
+                <span className="badge badge-sm indicator-item">
+                  {cart.length}
+                </span>
               </div>
             </div>
           </NavLink>
