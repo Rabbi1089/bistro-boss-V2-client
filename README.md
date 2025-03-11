@@ -50,5 +50,5 @@ A full-featured restaurant web application where users can browse food items by 
 
 ---
 
-## 📁 Project Structure
+
 
