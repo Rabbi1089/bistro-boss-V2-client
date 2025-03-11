@@ -9,7 +9,7 @@ A full-featured restaurant web application where users can browse food items by 
 ## 🔐 Login Credentials (For Testing)
 
 ### 👤 User Login
-- **Email:** `bistroUser@gmail.com`
+- **Email:** `bUser@gmail.com`
 - **Password:** `dU29$4khmWVm`
 
 ### 🛠️ Admin Login
