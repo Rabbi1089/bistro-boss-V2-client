@@ -4,7 +4,7 @@ import UseAuth from "./UseAuth";
 
 //create a new instance of axios
 const axiosSecure = axios.create({
-    baseURL: 'http://localhost:5000'
+    baseURL: 'https://bisrto-boss-server-v2.vercel.app'
 })
 
 const UseAxiosSecure = () => {
@@ -13,7 +13,6 @@ const UseAxiosSecure = () => {
 // Add a request interceptor
 axiosSecure.interceptors.request.use(function (config) {
     const token = localStorage.getItem('access-token')
-    console.log('req from inter interceptor' , token);
     config.headers.authorization = `Bearer ${token}`;
     return config;
   }, function (error) {
@@ -27,7 +26,6 @@ axiosSecure.interceptors.request.use(function (config) {
   return response;
 }, async (error) => {
   const status = error.response.status; 
-  console.log('status error' , status);
   if (status === 401 || status === 403 ) {
     console.log("logout now");
     await logOut()

@@ -16,7 +16,7 @@ const Testimonials = () => {
   const [reviews, setReviews] = useState([]);
   // console.log(reviews);
   useEffect(() => {
-    fetch("http://localhost:5000/review")
+    fetch("https://bisrto-boss-server-v2.vercel.app/review")
       .then((res) => res.json())
       .then((data) => setReviews(data));
   }, []);

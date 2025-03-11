@@ -28,7 +28,7 @@ const OrderItemCard = ({ item }) => {
       console.log(cartItem);
       axiosSecure.post('/cart', cartItem)
       .then(function (response) {
-        console.log(response);
+      
         if (response.data.insertedId) {
           Swal.fire({
             position: "top-start",

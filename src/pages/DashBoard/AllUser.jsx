@@ -29,7 +29,7 @@ const AllUser = () => {
   });
 
   const handleMakeAdmin = (user) => {
-    console.log(user);
+
     axiosSecure.patch(`/users/admin/${user._id}`).then((res) => {
       // console.log(res.data);
       if (res.data.modifiedCount > 0) {
@@ -44,7 +44,7 @@ const AllUser = () => {
   };
 
   const handleDelete = (id) => {
-    console.log(id);
+ 
     //sweet alert
     Swal.fire({
       title: "Are you sure?",

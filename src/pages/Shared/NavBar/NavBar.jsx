@@ -5,7 +5,7 @@ import useAdmin from "../../../hooks/useAdmin";
 
 const NavBar = () => {
   const { User, logOut } = UseAuth();
-  console.log("user from navbar", User);
+
   const [cart] = UseCart();
   const [isAdmin] = useAdmin();
   //console.log(cart);

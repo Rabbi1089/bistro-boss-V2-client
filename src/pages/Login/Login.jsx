@@ -21,7 +21,7 @@ const Login = () => {
   const [disable, setDisable] = useState(true);
   const location = useLocation();
   const from = location.state?.from?.pathname || "/";
-  console.log("State from location" , location.state);
+
 
 
   useEffect(() => {
@@ -33,7 +33,7 @@ const Login = () => {
     const form = e.target;
     const email = form.email.value;
     const password = form.password.value;
-    console.log(email, password);
+
     loginUser(email, password)
       .then((result) => {
         const user = result.user;
@@ -61,7 +61,7 @@ const Login = () => {
 
   const handleValidateCapcha = (e) => {
     const user_captcha_value = e.target.value;
-    console.log(user_captcha_value);
+
     if (validateCaptcha(user_captcha_value) == true) {
       setDisable(false);
     } else {
@@ -144,7 +144,6 @@ const Login = () => {
                 New Here ?&nbsp;
                 <span className=" text-yellow-600">
                   <Link to="/SignUp">Create an account</Link>
-                  <p>A123Df!2</p>
                 </span>
               </p>
               <SocialLogin />
