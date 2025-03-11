@@ -13,7 +13,7 @@ A full-featured restaurant web application where users can browse food items by 
 - **Password:** `dU29$4khmWVm`
 
 ### 🛠️ Admin Login
-- **Email:** `admin@example.com`
+- **Email:** `admin@admin.com`
 - **Password:** `123456`
 
 ---
