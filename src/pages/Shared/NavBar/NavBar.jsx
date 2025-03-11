@@ -53,7 +53,7 @@ const NavBar = () => {
   );
   return (
     <>
-      <div className="navbar fixed z-10 bg-opacity-50 bg-slate-700 text-white max-w-screen-xl">
+      <div className="navbar fixed z-10 bg-opacity-50 bg-slate-700 md:text-white sm:text-gray-700 max-w-screen-xl">
         {/* fixed z-10 bg-opacity-50 bg-slate-700 text-white max-w-screen-xl || this class is written for fixed NavBar */}
         <div className="navbar-start">
           <div className="dropdown">

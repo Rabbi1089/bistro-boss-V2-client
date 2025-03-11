@@ -7,7 +7,7 @@ import CheckoutForm from "./CheckoutForm";
 // recreating the `Stripe` object on every render.
 
 const stripePromise = loadStripe(import.meta.env.VITE_PAYMENT_API_PK);
-console.log(import.meta.env.VITE_PAYMENT_API_PK);
+
 
 const Payment = () => {
   return (
