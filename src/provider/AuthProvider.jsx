@@ -44,7 +44,7 @@ const AuthProvider = ({ children }) => {
       })
      }
      else{
-      console.log("current user not found");
+      //console.log("current user not found");
       localStorage.removeItem('access-token')
       setLoading(false);
      }
